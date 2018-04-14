@@ -61,25 +61,33 @@ app.get('/wallet/create', function (request, response) {
     response.json(nwallet.accounts[0]);
 });
 
-app.get('/wallet/transfer/:from/:public_key/:for', function (request, response) {
-    const intent = neon.api.makeIntent({ GAS: send_amount }, request.params.for);
+app.get('/wallet/transfer/:from/:public_key/:for/:amount/:currency', function (request, response) {
+   
+    var tconfig = null;
+    
+    if (request.params.currency=='NEO') {
+        tconfig = { NEO: request.params.amount };
+    } else {
+        tconfig = { GAS: request.params.amount };
+    }
+
+    const intent = neon.api.makeIntent(tconfig, request.params.for);
 
     const config = {
-        net: config_neon_network, 
-        address: request.params.from,  
+        net: config_neon_network,
+        address: request.params.from,
         privateKey: request.params.public_key,
         intents: intent
     }
 
     neon.api.sendAsset(config)
     .then(config => {
-        console.log(config.response);
         return response.json(config);
     })
     .catch(config => {
-        console.log(config);
         return response.json(config);
     });
+    
 
 });
 
