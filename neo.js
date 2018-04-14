@@ -1,15 +1,3 @@
-// Configuracion de prueba
-// var public_key          = '0322f5b6536e368217258202d5faf8a301454b3a92b9344891710f329e170a212b';
-// var address             = 'AJ4GYU9cnaZithFq61fhdLmKsjZgn4dNkG';
-// var WIF                 = 'KxCHxuYpYCgGyb3rbm2soZmzsp7qfPx6kEPsjjRjtN9Xrq5iUSxX';
-// var HEX                 = '1d1baeecd50735c4a8379b5ee32a2b53d94a212944a8000a147daf6b0374fcc9';
-// var passwordWallet      = '1024456';
-
-// Configuracion de prueba // nicolas
-var public_key = '3d14095d029c7452f4ce4039294bdd4e0ced5f20521bfe22d1dc0aa4df22f234';
-var address = 'AKhqz1wdB7Yru8QShS6CXVqUF9oDKrZyn4';
-var WIF = 'KyGSRE6iMPRrp1CjuQfHMRWXQNVgAHtBDVUHKmGPXXiftAjrsrVj';
-
 var send_amount = 0.000001;
 
 // Librerias necesarias
