@@ -2,6 +2,8 @@ var send_amount = 0.000001;
 
 // Librerias necesarias
 var neon = require('@cityofzion/neon-js');
+var Neon = neon.default;
+
 var express = require('express');
 var app = express();
 var mysql = require('mysql');
@@ -35,29 +37,6 @@ app.get('/wallet/balance/:address', function (request, response) {
 app.get('/wallet/create', function (request, response) {
     const nwallet = new neon.wallet.Wallet({name: 'SBBWALLET'});
     nwallet.addAccount();
-    // Esto responde el siguiente formato:
-    /*
-        {
-            "extra": null,
-            "isDefault": false,
-            "lock": false,
-            "contract": {
-                "script": "210390d4b763dbdfb84ba4712e2e676950fd8567b0831a6e6bcac7342e91aaa520cbac",
-                "parameters": [
-                    {
-                        "name": "signature",
-                        "type": "Signature"
-                    }
-                ],
-                "deployed": false
-            },
-            "_privateKey": "25ec34762512b83dc3c0bea0b522c6e49a71e41773f25e25b500967bb055c9c5",
-            "_publicKey": "0390d4b763dbdfb84ba4712e2e676950fd8567b0831a6e6bcac7342e91aaa520cb",
-            "_scriptHash": "de9fc5849f913dc8c82cf4d4524446d44baf0dc4",
-            "_address": "AZeWUvubh2HcqgKtmzbopmJVyoLThZSN89",
-            "label": "AZeWUvubh2HcqgKtmzbopmJVyoLThZSN89"
-        }
-    */
     response.json(nwallet.accounts[0]);
 });
 
@@ -91,6 +70,23 @@ app.get('/wallet/transfer/:from/:public_key/:for/:amount/:currency', function (r
 
 });
 
+// app.get('/contract/open', function (request, response) {
+
+//     const props = {
+//         scriptHash: '5b7074e873973a6ed3708862f219a6fbf4d1c411', // Scripthash for the contract
+//         operation: 'balanceOf', // name of operation to perform.
+//         args: [neon.u.reverseHex('cef0c0fdcfe7838eff6ff104f9cdec2922297537')] // any optional arguments to pass in. If null, use empty array.
+//     };
+
+//     const script = neon.sc.createScript(props);
+
+//     neon.rpc.Query.invokeScript(script)
+//     .execute('http://seed3.neo.org:20332')
+//     .then(res => {
+//         response.json(res);
+//     });
+        
+// });
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
